@@ -12,6 +12,10 @@ export const colors = {
     border: '#E5E9E6',
     iconMuted: '#858D88',
   },
+  semantic: {
+    danger: { primary: '#B5483F', container: '#F6E1DE' },
+    success: { primary: '#4E8B5F', container: '#E0EFE4' },
+  },
   modules: {
     events: { primary: '#527DAA', container: '#E0EAF4', subtle: '#F1F5FA' },
     recipes: { primary: '#BB735E', container: '#F3E3DE', subtle: '#FAF2EF' },

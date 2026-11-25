@@ -1,3 +1,3 @@
-import { DashboardScreen } from '../src/core/ui/DashboardScreen';
+import { DashboardScreen } from '../src/core/ui/screens/DashboardScreen';
 
 export default DashboardScreen;

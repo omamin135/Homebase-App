@@ -1,40 +1,41 @@
-import type { ReactNode } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { useEffect, type ReactNode } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import migrations from '../../../drizzle/migrations';
-import { colors } from '../theme';
+import { colors, spacing } from '../theme';
+import { AppText } from '../ui/components/AppText';
+import { useSnackbar } from '../ui/components/snackbar/useSnackbar';
 import { db } from './client';
 
 // Applies pending migrations at startup and renders children once done.
 export function MigrationGate({ children }: { children: ReactNode }) {
   const { success, error } = useMigrations(db, migrations);
+  const { showError } = useSnackbar();
 
-  if (error) {
-    return (
-      <View style={styles.center}>
-        <Text style={styles.text}>Database migration failed</Text>
-        <Text style={styles.sub}>{error.message}</Text>
-      </View>
-    );
-  }
-  if (!success) {
-    return (
-      <View style={styles.center}>
+  useEffect(() => {
+    if (error) showError(`Database migration failed: ${error.message}`);
+  }, [error, showError]);
+
+  if (success) return <>{children}</>;
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: spacing.xl,
+        gap: spacing.md,
+        backgroundColor: colors.neutral.background,
+      }}
+    >
+      {error ? (
+        <AppText variant="supporting" tone="secondary" style={{ textAlign: 'center' }}>
+          The app cannot start until the database is ready.
+        </AppText>
+      ) : (
         <ActivityIndicator color={colors.neutral.textSecondary} />
-      </View>
-    );
-  }
-  return <>{children}</>;
+      )}
+    </View>
+  );
 }
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 24,
-    backgroundColor: colors.neutral.background,
-  },
-  text: { color: colors.neutral.text, fontSize: 16, marginBottom: 8 },
-  sub: { color: colors.neutral.textSecondary, fontSize: 13, textAlign: 'center' },
-});
