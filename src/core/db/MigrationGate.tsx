@@ -26,7 +26,7 @@ export function MigrationGate({ children }: { children: ReactNode }) {
         justifyContent: 'center',
         padding: spacing.xl,
         gap: spacing.md,
-        backgroundColor: colors.neutral.background,
+        backgroundColor: colors.neutral.background.primary,
       }}
     >
       {error ? (
@@ -34,7 +34,7 @@ export function MigrationGate({ children }: { children: ReactNode }) {
           The app cannot start until the database is ready.
         </AppText>
       ) : (
-        <ActivityIndicator color={colors.neutral.textSecondary} />
+        <ActivityIndicator color={colors.neutral.text.secondary} />
       )}
     </View>
   );

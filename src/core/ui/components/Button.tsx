@@ -8,7 +8,7 @@ type Props = Omit<PressableProps, 'children'> & {
   color?: string;
 };
 
-export function Button({ label, color = colors.neutral.text, disabled, style, ...rest }: Props) {
+export function Button({ label, color = colors.neutral.text.primary, disabled, style, ...rest }: Props) {
   return (
     <Pressable
       disabled={disabled}

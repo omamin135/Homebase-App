@@ -5,11 +5,11 @@ type Variant = keyof typeof typography;
 type Tone = 'primary' | 'secondary' | 'danger' | 'success' | 'inverse';
 
 const toneColor: Record<Tone, string> = {
-  primary: colors.neutral.text,
-  secondary: colors.neutral.textSecondary,
+  primary: colors.neutral.text.primary,
+  secondary: colors.neutral.text.secondary,
   danger: colors.semantic.danger.primary,
   success: colors.semantic.success.primary,
-  inverse: colors.neutral.surface,
+  inverse: colors.neutral.surface.primary,
 };
 
 type Props = TextProps & { variant?: Variant; tone?: Tone };

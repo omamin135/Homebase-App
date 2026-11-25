@@ -1,7 +1,7 @@
 import { Link } from "expo-router";
 import { Pressable, View } from "react-native";
 import { moduleRegistry } from "../../module-registry";
-import { colors, radius, spacing } from "../../theme";
+import { colors, moduleTheme, radius } from "../../theme";
 import { AppText } from "../components/AppText";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
@@ -22,7 +22,7 @@ export function DashboardScreen() {
         </Card>
       ) : (
         moduleRegistry.map((m) => {
-          const theme = colors.modules[m.theme];
+          const theme = moduleTheme(m.theme);
           return (
             <Link key={m.id} href={m.route} asChild>
               <Pressable>
@@ -48,11 +48,11 @@ export function DashboardScreen() {
                   </View>
                   <View style={{ flex: 1 }}>
                     <AppText variant="sectionHeading">{m.name}</AppText>
-                    {m.description ? (
+                    {!!m.description && (
                       <AppText variant="supporting" tone="secondary">
                         {m.description}
                       </AppText>
-                    ) : null}
+                    )}
                   </View>
                 </Card>
               </Pressable>
@@ -60,16 +60,6 @@ export function DashboardScreen() {
           );
         })
       )}
-
-      <Link href="/settings" asChild>
-        <Pressable
-          style={{ alignItems: "center", paddingVertical: spacing.md }}
-        >
-          <AppText variant="supporting" tone="secondary">
-            Settings and backup
-          </AppText>
-        </Pressable>
-      </Link>
 
       <Pressable
         onPress={() => {

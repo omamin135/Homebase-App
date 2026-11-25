@@ -49,6 +49,30 @@ module.exports = defineConfig([
     ignores: ['dist/*', 'drizzle/*'],
   },
 
+  // Conditional rendering: prefer `cond && <X />`, but the condition must be a
+  // real boolean. `{0 && <X />}` or `{"" && <X />}` renders a bare value, which
+  // crashes React Native. Coerce with `!!value` when it isn't a boolean.
+  {
+    files: [TS],
+    rules: {
+      'react/jsx-no-leaked-render': ['error', { validStrategies: ['coerce', 'ternary'] }],
+      // The lucide-react-native index pulls every icon into the bundle
+      // (~2,000 extra modules). Import each icon from its own path instead.
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'lucide-react-native',
+              allowImportNames: ['LucideIcon', 'LucideProps'],
+              message: "Import icons one by one: import House from 'lucide-react-native/icons/house'.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   // Core never imports modules.
   { files: [`src/core/${TS}`], rules: restrict(noModules) },
 

@@ -20,16 +20,16 @@ export function SettingsScreen() {
           onPress={exportBackup}
           disabled={status === 'working'}
         />
-        {status === 'done' ? (
+        {status === 'done' && (
           <AppText variant="supporting" tone="secondary">
             Exported {message}
           </AppText>
-        ) : null}
-        {status === 'error' ? (
+        )}
+        {status === 'error' && (
           <AppText variant="supporting" tone="danger">
             Export failed: {message}
           </AppText>
-        ) : null}
+        )}
       </Card>
     </Screen>
   );

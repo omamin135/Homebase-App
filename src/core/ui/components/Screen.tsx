@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react';
-import { ScrollView } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, spacing } from '../../theme';
-import { AppText } from './AppText';
+import type { ReactNode } from "react";
+import { ScrollView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { colors, spacing } from "../../theme";
+import { BOTTOM_NAV_HEIGHT, BOTTOM_NAV_OFFSET } from "../navigation/bottom-nav";
+import { AppText } from "./AppText";
 
 type Props = { title?: string; children: ReactNode };
 
@@ -11,19 +12,21 @@ export function Screen({ title, children }: Props) {
   const insets = useSafeAreaInsets();
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: colors.neutral.background }}
+      style={{ flex: 1, backgroundColor: colors.neutral.background.primary }}
       contentContainerStyle={{
         paddingTop: insets.top + spacing.xl,
-        paddingBottom: insets.bottom + spacing.xl,
+        // Clear the floating bottom navigation bar.
+        paddingBottom:
+          insets.bottom + BOTTOM_NAV_OFFSET + BOTTOM_NAV_HEIGHT + spacing.xl,
         paddingHorizontal: spacing.lg,
         gap: spacing.md,
       }}
     >
-      {title ? (
+      {!!title && (
         <AppText variant="screenTitle" style={{ marginBottom: spacing.sm }}>
           {title}
         </AppText>
-      ) : null}
+      )}
       {children}
     </ScrollView>
   );

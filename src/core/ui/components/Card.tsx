@@ -9,10 +9,10 @@ export function Card({ style, ...rest }: ViewProps) {
         {
           padding: spacing.lg,
           gap: spacing.md,
-          backgroundColor: colors.neutral.surface,
+          backgroundColor: colors.neutral.surface.primary,
           borderRadius: radius.card,
           borderWidth: 1,
-          borderColor: colors.neutral.border,
+          borderColor: colors.neutral.border.subtle,
         },
         style,
       ]}

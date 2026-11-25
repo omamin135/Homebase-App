@@ -1,6 +1,6 @@
 # Homebase
 
-Personal Android life-management app: a dashboard plus self-contained modules (checklist, shopping list, recipes, contacts, etc.). Expo + React Native + TypeScript, SQLite via Drizzle, Jotai for UI state. Local-first, single user, with a possible backend later.
+Personal Android life-management app: a dashboard plus self-contained modules. Expo + React Native + TypeScript, SQLite via Drizzle, Jotai for UI state. Local-first, single user, with a possible backend later.
 
 ## Read the spec first
 
@@ -41,5 +41,6 @@ Do not put routine work in the spec. Leave out feature progress, task lists, per
 - Jotai atoms hold UI state only. The database is the source of truth.
 - Style components inline (`style={{ ... }}`) using theme tokens. Do not use `StyleSheet.create`. Reuse the shared components in `src/core/ui/components/` before writing new styling.
 - Whenever you add, change or remove a shared component in `src/core/ui/components/`, update `claude_docs/COMPONENTS.md` in the same change.
+- Conditional rendering: use `{cond && <X />}` rather than `{cond ? <X /> : null}`. Use a ternary only when both branches render something. The condition must be a real boolean: coerce strings and numbers with `!!value`, because a bare `0` or `""` crashes React Native. Lint enforces this (`react/jsx-no-leaked-render`).
 - Entry chain is `index.ts` -> `src/App.tsx` -> `src/Providers.tsx`. Add new context providers in `Providers.tsx`.
 - Before finishing a change, run `npm run typecheck` and `npm run lint` and fix what they report. Lint enforces the layer boundaries (see the spec's "Layers" section); never disable a boundary rule to make code pass. Fix the import instead.

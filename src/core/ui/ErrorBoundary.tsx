@@ -34,7 +34,7 @@ export class ErrorBoundary extends Component<Props, State> {
           justifyContent: 'center',
           padding: spacing.xl,
           gap: spacing.md,
-          backgroundColor: colors.neutral.background,
+          backgroundColor: colors.neutral.background.primary,
         }}
       >
         <AppText variant="sectionHeading">Something went wrong</AppText>
