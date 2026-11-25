@@ -1,0 +1,78 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "724ea19a-f2d2-4199-b73d-52d95a71d30f",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "Core_Setting": {
+      "name": "Core_Setting",
+      "columns": {
+        "Id": {
+          "name": "Id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "CreateDate": {
+          "name": "CreateDate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ModifiedDate": {
+          "name": "ModifiedDate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "DeletedDate": {
+          "name": "DeletedDate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "SettingKey": {
+          "name": "SettingKey",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "SettingValue": {
+          "name": "SettingValue",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "Core_Setting_SettingKey_unique": {
+          "name": "Core_Setting_SettingKey_unique",
+          "columns": [
+            "SettingKey"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
